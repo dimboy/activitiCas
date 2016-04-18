@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="Examples"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <process processType="Private" isExecutable="true" id="oneTaskProcess" name="The One Task Process" >
+
+    <!-- nodes -->
+    <startEvent id="theStart"  isInterrupting="false">
+    </startEvent>
+    <userTask id="theTask" name="my task" >
+      <ioSpecification>
+        <dataInput id="theTask_NodeNameInput" name="NodeName" />
+        <inputSet>
+          <dataInputRefs>theTask_NodeNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>theTask_NodeNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">my task</from>
+          <to xsi:type="tFormalExpression">theTask_NodeNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </userTask>
+    <endEvent id="theEnd" />
+
+    <!-- connections -->
+    <sequenceFlow id="theStart-theTask" sourceRef="theStart" targetRef="theTask" />
+    <sequenceFlow id="theTask-theEnd" sourceRef="theTask" targetRef="theEnd" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="oneTaskProcess" >
+      <bpmndi:BPMNShape bpmnElement="theStart" >
+        <dc:Bounds x="10" y="46" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="theTask" >
+        <dc:Bounds x="221" y="46" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="theEnd" >
+        <dc:Bounds x="464" y="45" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="theStart-theTask" >
+        <di:waypoint x="34" y="70" />
+        <di:waypoint x="271" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="theTask-theEnd" >
+        <di:waypoint x="271" y="70" />
+        <di:waypoint x="488" y="69" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
